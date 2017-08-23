@@ -1,0 +1,21 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/nodejs', '/usr/bin/npm', 'config', 'get', 'prefix' ]
+2 info using npm@3.10.10
+3 info using node@v6.11.2
+4 verbose config Skipping project config: /home/kalleb/.npmrc. (matches userconfig)
+5 verbose exit [ 0, true ]
+6 verbose stack Error: write EPIPE
+6 verbose stack     at exports._errnoException (util.js:1020:11)
+6 verbose stack     at WriteWrap.afterWrite (net.js:800:14)
+7 verbose cwd /home/kalleb/Área de Trabalho/FRONT
+8 error Linux 4.10.0-32-generic
+9 error argv "/usr/bin/nodejs" "/usr/bin/npm" "config" "get" "prefix"
+10 error node v6.11.2
+11 error npm  v3.10.10
+12 error code EPIPE
+13 error errno EPIPE
+14 error syscall write
+15 error write EPIPE
+16 error If you need help, you may report this error at:
+16 error     <https://github.com/npm/npm/issues>
+17 verbose exit [ 1, true ]
