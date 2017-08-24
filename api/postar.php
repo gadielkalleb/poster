@@ -2,6 +2,9 @@
 require 'tools.php';
 
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
+
 
 if (validaToken($_POST['id'], $_POST['token']) === false) {
     echo json_encode([
@@ -19,7 +22,7 @@ $data_post = date('Y-m-d');
 $hora_post = date('H:i:s');
 $id = $_POST['id'];
 
-$sql = "INSERT INTO fotos
+$sql = "INSERT INTO Fotos
         (Foto, Descricao, Data_post, Hora_post, Usuarios_id)
         VALUES
         ('$foto', '$descricao', '$data_post', '$hora_post', $id)";

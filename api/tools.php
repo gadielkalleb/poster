@@ -1,7 +1,7 @@
 <?php
 
 function conecta() {
-    $con = mysqli_connect('localhost', 'root', 'root', 'poster');
+    $con = mysqli_connect('localhost', 'kalleb', '1Pieceluffy.', 'poster');
     if (mysqli_connect_error($con)) {
         exit('Erro ao conectar');
     }
@@ -12,7 +12,7 @@ function validaToken ($id, $token) {
     $con = conecta();
 
     $sql = "SELECT * 
-            FROM usuarios
+            FROM Usuarios
             WHERE id=$id 
                 AND token='$token'";
 

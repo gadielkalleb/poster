@@ -30,6 +30,15 @@ $senha = $_POST['senha'];
 
 // Atenção validar o POST!!
 
+function anti_ataque($sql){
+    
+        if(get_magic_quotes_gpc()){
+            $sql=mysqli_real_escape_string($sql);
+        }
+        return mysqli_real_escape_string($sql);
+    }
+    
+
 $sql = "INSERT INTO usuarios 
             (Nome, Email, Telefone, Foto_perfil, Senha)
         VALUES

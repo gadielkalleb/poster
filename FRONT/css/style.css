@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+.titulo {
+    font-size: 50px;
+    font-family: 'Lobster', cursive;
+}
+
+body {
+    /* background: #FEAC5E; */
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #4BC0C8, #FEAC5E,#C04461);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #4BC0C8, #FEAC5E,#C04461);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#icone {
+    display: inline;
+    float: right;
+    -webkit-transform: rotate(30deg);
+}

@@ -24,7 +24,7 @@ $(document).ready(function () {
         }
     });
     upload();
-    postarImagem();
+    atualizarPosts();
 });
 
 function menuToggleInit() {
@@ -67,6 +67,8 @@ function upload() {
         if ($(this).val()) {
             var form = new FormData();
             form.append('foto', $(this)[0].files[0]);
+            form.append('token', window.localStorage.getItem('token'));
+            form.append('id', window.localStorage.getItem('id'));
 
             $.ajax({
                 url: api + '/upload.php',
@@ -85,6 +87,7 @@ function upload() {
             });
         }
     });
+    
     $('#btn_postar').click(function  () {
         var foto = window.upload_foto;
 
@@ -114,6 +117,7 @@ function upload() {
                 if (data.created === true) {
                     alert('Cadastrado com sucesso');
                     clearUpload();
+                    $('#fechar').click();
                     return true;
                 }
             }
@@ -127,6 +131,61 @@ function clearUpload() {
     window.upload_foto = undefined;
 }
 
-function postarImagem() {
+function atualizarPosts() {
+
+    var form ={
+        id:window.localStorage.getItem('id'),
+        token:window.localStorage.getItem('token')
+    }
+
+    $.ajax({
+        url:api+'/getposts.php',
+        type:'POST',
+        data:form,
+        success: (data)=>{
+            alert(data);
+        }
     
+    });
+}
+
+function exibePosts(){
+    var page=$('#page');
+    var openRow = '<section class="row">';
+    '</section>'
+    $.each(data, (index, valor)=>{
+        page.append('');
+    })
+
+    
+}
+
+
+function templatePost(post){
+    var post = 
+            '</br>'+
+            '<section class="row">'+
+            '<div class="col-md-8 col-sm-12 col-xs-12">'+
+                '<img class="img-rounded img-responsive" src="'+api+'/'+ post+'" alt="">'+
+                '<div>Postado em '+ post.dataf_post +'</div>'+
+                '<div>'+
+                    '<strong>'+
+                        '<span id="total_likes">7</span> likes'+
+                    '</strong>'+
+                '</div>'+
+                '<div>'+
+                    '<button class="btn btn-primary curtir" href="#">Curtir</button>'+
+                    '<button class="btn btn-success pull-right">Favoritar</button>'+
+                '</div>'+
+            '</div>'+
+        '</section>'+
+        '<hr>';
+    return post;    
+}
+
+
+function curtir(){
+    $('.curtir').click(()=>{
+        alert('clicou');
+    })
 }

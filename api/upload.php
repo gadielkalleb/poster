@@ -3,6 +3,9 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit('Permissao negada');
 }
 
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
 
 $foto = $_FILES['foto'];
 
@@ -14,12 +17,11 @@ if ($foto['error'] == 0) {
     move_uploaded_file($foto['tmp_name'], $posts);
 }
 
-header('Content-Type: application/json');
+
 
 $json = [
     'img' => $posts
 ];
 
-sleep(3);
 
 echo json_encode($json);
