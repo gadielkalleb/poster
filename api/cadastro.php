@@ -5,15 +5,11 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit('Permissão negada');
 }
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
-
-
 
 $foto = $_FILES['foto'];
 
 $profile = '';
+
 
 if ($foto['error'] == 0) {
     $id = time() . rand(1, 99999);
@@ -32,12 +28,12 @@ $senha = $_POST['senha'];
 
 function anti_ataque($sql){
     
-        if(get_magic_quotes_gpc()){
-            $sql=mysqli_real_escape_string($sql);
-        }
-        return mysqli_real_escape_string($sql);
+    if(get_magic_quotes_gpc()){
+        $sql=mysqli_real_escape_string($sql);
     }
-    
+    return mysqli_real_escape_string($sql);
+}
+
 
 $sql = "INSERT INTO usuarios 
             (Nome, Email, Telefone, Foto_perfil, Senha)
@@ -56,4 +52,7 @@ if (mysqli_affected_rows($con)) {
 }
 
 header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
+
 echo json_encode($json);

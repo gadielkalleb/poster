@@ -3,9 +3,6 @@ if ($_SERVER['REQUEST_METHOD'] != 'POST') {
     exit('Permissao negada');
 }
 
-header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
 
 $foto = $_FILES['foto'];
 
@@ -18,6 +15,9 @@ if ($foto['error'] == 0) {
 }
 
 
+header('Content-Type: application/json');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
 
 $json = [
     'img' => $posts

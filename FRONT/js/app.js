@@ -51,7 +51,7 @@ function paginaFavoritos() {
 
 function validaLogin() {
     var token = window.localStorage.getItem('token');
-    if (token === null) {
+    if (token == null || token=='') {
         window.location = 'index.html';
     }
 }
@@ -118,6 +118,7 @@ function upload() {
                     alert('Cadastrado com sucesso');
                     clearUpload();
                     $('#fechar').click();
+                    atualizarPosts();
                     return true;
                 }
             }
@@ -143,21 +144,31 @@ function atualizarPosts() {
         type:'POST',
         data:form,
         success: (data)=>{
-            alert(data);
+            exibePosts(data);
+            curtir();
         }
-    
     });
 }
 
-function exibePosts(){
+function exibePosts(data){
     var page=$('#page');
-    var openRow = '<section class="row">';
-    '</section>'
-    $.each(data, (index, valor)=>{
-        page.append('');
-    })
 
-    
+    page.empty();
+
+   
+    $.each(data, (index, valor)=>{
+
+        var profile = 
+            '<section class="row">'+
+                '<div class="col-md-4">'+
+                    '<div><img src="'+ post.Foto_perfil +'" alt=""> '+ post.Nome +'</div>'+
+                '<div>'+
+            '</section>';    
+            
+        var post = templatePost(post);
+
+        page.append(profile + post);
+    });
 }
 
 
@@ -186,6 +197,41 @@ function templatePost(post){
 
 function curtir(){
     $('.curtir').click(()=>{
-        alert('clicou');
-    })
+        
+        var like = $(this);
+        $.ajax({
+            url: api +'/curtir.php',
+            type: 'POST',
+            data: {
+                token: window.localStorage.getItem('token'),
+                id: window.localStorage.getItem('id'),
+                postid: $(this).attr('data-postid')
+            },
+            success: (data) =>{
+                console.log(data);
+                if (data.retorno > 0){
+                    console.log(like);
+                    $(like).attr('disabled', 'disabled');
+                    $(like).text('descurtir');
+                }
+            }
+        });
+    });
+}
+
+function atualizaLike(postId){
+    window.total = 0;
+    $.ajax({
+        url: api + '/atualizaLike.php',
+        type: 'POST',
+        data: {
+            token: window.localStorage.getItem('token'),
+            id: window.localStorage.getItem('id'),
+            postId: postId
+        },
+        success: (data) =>{
+            console.log($('total_likes_' + postId));
+            $('#total_likes_' + postId).html(data.total_like)
+        }
+    });
 }

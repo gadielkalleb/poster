@@ -2,9 +2,6 @@
 require 'tools.php';
 
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers', 'Origin, X-Request-Width, Content-Type, Accept');
-
 
 if (validaToken($_POST['id'], $_POST['token']) === false) {
     echo json_encode([

@@ -13,22 +13,19 @@ $senha=$_POST['senha'];
 $con = conecta();
 
 
-function anti_ataque($sql){
+function anti_ataque($con, $sql){
 
     if(get_magic_quotes_gpc()){
-        $sql=mysqli_real_escape_string($sql);
+        $res=mysqli_real_escape_string($con, $sql);
     }
-    return mysqli_real_escape_string($sql);
+    return mysqli_real_escape_string($con, $sql);
 }
-
 
 //seleciona os dados que estão no banco
 $sql = "SELECT id,Nome 
     FROM Usuarios 
     WHERE Email='$email' 
     AND Senha='$senha'";
-
-
 
 $res = mysqli_query($con, $sql);
 
