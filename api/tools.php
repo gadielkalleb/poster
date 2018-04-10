@@ -1,7 +1,7 @@
 <?php
 
 function conecta() {
-    $con = mysqli_connect('localhost', 'kalleb', '1Pieceluffy.', 'poster');
+    $con = mysqli_connect('', '', '', 'poster');
     if (mysqli_connect_error($con)) {
         exit('Erro ao conectar');
     }
